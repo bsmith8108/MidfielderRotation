@@ -38,3 +38,7 @@ margin-top:50px;
 background-color:lightblue;
 cursor:pointer;
 }
+
+.player-class > span {
+padding-left:75px;
+}

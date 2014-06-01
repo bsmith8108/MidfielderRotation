@@ -7,7 +7,9 @@ $(document).ready( function() {
 	submit.click(function() {
 		var player = $("#player").val();
 		$("#player").val("");
-		playerbox.append("<div class=\"player-class\" id=\""+player+"\" onclick=\"toggletime(\'"+player+"\')\">"+player+"</div>");
+		var player_string = "<div class=\"player-class\" id=\""+player+"\" onclick=\"toggletime(\'"+player+"\')\">";
+		player_string = player_string +player+"<span class=\"time\">0:00</span></div>";
+		playerbox.append(player_string);
 		player_list.push(player);
 	});
 	done.click(function() {
@@ -34,7 +36,6 @@ function toggletime(player) {
 		playing[player] = false;
 		var elapsed = new Date() - currentWatch[player];
 		playingtime[player] = playingtime[player] + elapsed;
-		console.log(playingtime[player])
 		updateColors();
 	}
 	else {
@@ -42,6 +43,18 @@ function toggletime(player) {
 		currentWatch[player] = new Date();
 		updateColors();
 	}
+	var minutes = Math.floor(playingtime[player]/60000);
+	var seconds = Math.floor(playingtime[player]/1000);
+	if (seconds.toString().length == 1) {
+		var time_string = minutes.toString()+":0"+seconds.toString();
+	}
+	else {
+		var time_string = minutes.toString()+":"+seconds.toString();
+	}
+	
+	var span = $("#"+player+" span");
+	console.log(span)
+	span.text(time_string);
 }
 
 function updateColors() {
