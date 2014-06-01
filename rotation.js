@@ -45,6 +45,7 @@ function toggletime(player) {
 	}
 	var minutes = Math.floor(playingtime[player]/60000);
 	var seconds = Math.floor(playingtime[player]/1000);
+	seconds = seconds%60;
 	if (seconds.toString().length == 1) {
 		var time_string = minutes.toString()+":0"+seconds.toString();
 	}
@@ -53,7 +54,6 @@ function toggletime(player) {
 	}
 	
 	var span = $("#"+player+" span");
-	console.log(span)
 	span.text(time_string);
 }
 
