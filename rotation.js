@@ -4,10 +4,9 @@ $(document).ready( function() {
 	var submit = $("#submit"),
 	done = $("#startgame"),
 	playerbox = $("#players");
-	console.log("here")
 	submit.click(function() {
 		var player = $("#player").val();
-		console.log("Player to be passed: ",typeof player)
+		$("#player").val("");
 		playerbox.append("<div class=\"player-class\" id=\""+player+"\" onclick=\"toggletime(\'"+player+"\')\">"+player+"</div>");
 		player_list.push(player);
 	});

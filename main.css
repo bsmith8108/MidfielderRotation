@@ -1,18 +1,23 @@
 body {
 margin:0px;
 padding:0px;
-font-size:50px;
+font-size:80px;
 }
 
 #players-input {
 margin:10px;
 }
 
+input {
+font-size:50px;
+}
+
 #submit {
 cursor:pointer;
 padding:10px;
 background-color:yellow;
-margin:10px;
+margin-bottom:30px;
+margin-top:20px;
 
 }
 
@@ -28,7 +33,8 @@ margin:10px;
 
 .player-class {
 padding:20px;
-margin:10px;
+margin:30px;
+margin-top:50px;
 background-color:lightblue;
 cursor:pointer;
 }
