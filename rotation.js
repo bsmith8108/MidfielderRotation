@@ -46,12 +46,26 @@ function toggletime(player) {
 }
 
 function updateColors() {
+	var lowDomain = 10000000,
+	highDomain = 0;
+	for (var j=0; j<player_list.length; j++) {
+		if (playingtime[player_list[j]] > highDomain) {
+			highDomain = playingtime[player_list[j]];
+		}
+		if (playingtime[player_list[j]] < lowDomain) {
+			lowDomain = playingtime[player_list[j]];
+		}
+	}
+	var middle = (highDomain-lowDomain) + lowDomain;
+	var color = d3.scale.linear()
+		.domain([lowDomain,highDomain])
+		.range(["red","green"]);
 	for (var i=0; i<player_list.length; i++) {
 		if (playing[player_list[i]]) {
 			$("#"+player_list[i]).css("background-color","yellow");
 		}
 		else {
-			$("#"+player_list[i]).css("background-color","red");
+			$("#"+player_list[i]).css("background-color",color(playingtime[player_list[i]]));
 		}
 	}
 }
