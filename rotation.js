@@ -8,7 +8,7 @@ $(document).ready( function() {
 		var player = $("#player").val();
 		$("#player").val("");
 		var player_string = "<div class=\"player-class\" id=\""+player+"\" onclick=\"toggletime(\'"+player+"\')\">";
-		player_string = player_string +player+"<span class=\"timeCum\">Cum: 0:00</span>";
+		player_string = player_string +player+"<br><span class=\"timeCum\">Cum: 0:00</span>";
 		player_string = player_string +"<span class=\"timeCurrent\">Curr: 0:00</span></div>";
 		playerbox.append(player_string);
 		player_list.push(player);
