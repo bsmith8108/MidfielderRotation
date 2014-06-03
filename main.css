@@ -27,6 +27,14 @@ padding:10px;
 margin:10px;
 background-color:red;
 }
+
+#stopTime {
+cursor:pointer;
+padding:10px;
+margin:10px;
+background-color:blue;
+}
+
 #players {
 margin:10px;
 }

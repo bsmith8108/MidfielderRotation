@@ -98,8 +98,12 @@ function updateTimer(person) {
 
 function stopTimer(person) {
 	clearInterval(timers[person]);
-	var span = $("div#"+person).children()[1];
+	var span = $("div#"+person).children()[2];
 	span.innerHTML = "Curr: 0:00";
+}
+
+function stopTimerTemp(person) {
+	clearInterval(timers[person]);
 }
 
 function render(person) {
@@ -113,7 +117,7 @@ function render(person) {
 		var time_string = minutes.toString()+":"+seconds.toString();
 	}
 	
-	var span = $("div#"+person).children()[0];
+	var span = $("div#"+person).children()[1];
 	span.innerHTML = "Cum: " + time_string;
 	
 	var minutes = Math.floor(current[person]/60000);
@@ -126,6 +130,31 @@ function render(person) {
 		var time_string = minutes.toString()+":"+seconds.toString();
 	}
 	
-	var span = $("div#"+person).children()[1];
+	var span = $("div#"+person).children()[2];
 	span.innerHTML = "Curr: " + time_string;
 }
+
+var running = true;
+var was_stopped = [];
+
+function stopAll() {
+	if (running) {
+		console.log(playing.length);
+		for (var i=0; i<player_list.length; i++) {
+			if (playing[player_list[i]]) {
+				var person = player_list[i];
+				was_stopped.push(person)
+				stopTimerTemp(person)
+			}
+		}
+	running = false;
+	}
+	else {
+		for (var j=0; j<was_stopped.length; j++) {
+			startTimer(was_stopped[j]);
+		}
+	was_stopped = [];
+	running = true;
+	}
+}
+
