@@ -8,8 +8,8 @@ $(document).ready( function() {
 		var player = $("#player").val();
 		$("#player").val("");
 		var player_string = "<div class=\"player-class\" id=\""+player+"\" onclick=\"toggletime(\'"+player+"\')\">";
-		player_string = player_string +player+"<span class=\"timeCum\">Cumulative: 0:00</span>";
-		player_string = player_string +"<span class=\"timeCurrent\">Current: 0:00</span></div>";
+		player_string = player_string +player+"<span class=\"timeCum\">Cum: 0:00</span>";
+		player_string = player_string +"<span class=\"timeCurrent\">Curr: 0:00</span></div>";
 		playerbox.append(player_string);
 		player_list.push(player);
 	});
@@ -99,7 +99,7 @@ function updateTimer(person) {
 function stopTimer(person) {
 	clearInterval(timers[person]);
 	var span = $("div#"+person).children()[1];
-	span.innerHTML = "Current: 0:00";
+	span.innerHTML = "Curr: 0:00";
 }
 
 function render(person) {
@@ -114,7 +114,7 @@ function render(person) {
 	}
 	
 	var span = $("div#"+person).children()[0];
-	span.innerHTML = "Cumulative: " + time_string;
+	span.innerHTML = "Cum: " + time_string;
 	
 	var minutes = Math.floor(current[person]/60000);
 	var seconds = Math.floor(current[person]/1000);
@@ -127,5 +127,5 @@ function render(person) {
 	}
 	
 	var span = $("div#"+person).children()[1];
-	span.innerHTML = "Current: " + time_string;
+	span.innerHTML = "Curr: " + time_string;
 }
