@@ -25,6 +25,7 @@ var playing = {};
 var currentWatch = {}
 var timers = {};
 var clocks = {};
+var running = true;
 
 function startGame() {
 	var players_length = $("#players").children().length;
@@ -45,9 +46,11 @@ function toggletime(player) {
 		updateColors();
 	}
 	else {
+		if (running) {
+			startTimer(player);
+			currentWatch[player] = new Date();
+		}
 		playing[player] = true;
-		startTimer(player);
-		currentWatch[player] = new Date();
 		updateColors();
 	}
 }
@@ -88,12 +91,17 @@ function startTimer(person) {
 }
 
 function updateTimer(person) {
-	var now = Date.now();
-	var d  = now - offsets[person];
-	offsets[person] = now;
-	clocks[person] += d;
-	current[person] += d;
-	render(person);
+	if (playing[person]) {
+		var now = Date.now();
+		var d  = now - offsets[person];
+		offsets[person] = now;
+		clocks[person] += d;
+		current[person] += d;
+		render(person);
+	}
+	else {
+		stopTimer(person);
+	}
 }
 
 function stopTimer(person) {
@@ -134,12 +142,11 @@ function render(person) {
 	span.innerHTML = "Curr: " + time_string;
 }
 
-var running = true;
 var was_stopped = [];
 
 function stopAll() {
 	if (running) {
-		console.log(playing.length);
+		$("#stopTime").text("START");
 		for (var i=0; i<player_list.length; i++) {
 			if (playing[player_list[i]]) {
 				var person = player_list[i];
@@ -150,8 +157,11 @@ function stopAll() {
 	running = false;
 	}
 	else {
-		for (var j=0; j<was_stopped.length; j++) {
-			startTimer(was_stopped[j]);
+		$("#stopTime").text("STOP");
+		for (var j=0; j<player_list.length; j++) {
+			if(playing[player_list[j]]){
+				startTimer(player_list[j]);
+			}
 		}
 	was_stopped = [];
 	running = true;
