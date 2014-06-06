@@ -90,6 +90,12 @@ function startTimer(person) {
 	timers[person] = id;
 }
 
+function startTimerTemp(person) {
+	offsets[person] = Date.now();
+	var id = setInterval(function() {updateTimer(person)}, 1000);
+	timers[person] = id;
+}
+
 function updateTimer(person) {
 	if (playing[person]) {
 		var now = Date.now();
@@ -160,7 +166,7 @@ function stopAll() {
 		$("#stopTime").text("STOP");
 		for (var j=0; j<player_list.length; j++) {
 			if(playing[player_list[j]]){
-				startTimer(player_list[j]);
+				startTimerTemp(player_list[j]);
 			}
 		}
 	was_stopped = [];
